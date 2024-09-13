@@ -1,0 +1,10 @@
+/* custom css goes here */
+.me1 {
+    transform: scale(0.2);
+}
+
+/* CSS for diagonal gradient background */
+.diagonal-gradient {
+    background: linear-gradient(135deg, teal 0%, pink 100%);
+  }
+  
