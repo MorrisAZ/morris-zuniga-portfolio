@@ -1,3 +1,3 @@
 # morris-zuniga-portfolio
 
-#Welcome to my Portfolio website, showcasing a MEAN stack apporach to my design
+Welcome to my Portfolio website, showcasing a MEAN stack approach to my web application development
