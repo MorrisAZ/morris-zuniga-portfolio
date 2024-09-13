@@ -6,11 +6,11 @@
     "start": "nodemon ./server.js"
   },
   "engines": {
-    "node": "^14.00.0",
+    "node": "^10.00.0",
     "npm": "^6.00.0"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^5.15.4",
+    "@fortawesome/fontawesome-free": "^5.14.0",
     "@popperjs/core": "^2.11.6",
     "bootstrap": "^5.3.3",
     "cookie-parser": "~1.4.4",
