@@ -22,6 +22,7 @@ mongoDB.once('open', () => {
 
 let indexRouter = require('../routes/index');//for top level sites
 let usersRouter = require('../routes/users');
+let booksRouter = require('../routes/book');//for books collection
 
 let app = express();
 
@@ -38,6 +39,7 @@ app.use(express.static(path.join(__dirname, '../node_modules')));//for bootstrap
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/book-list', booksRouter);//for books collection
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

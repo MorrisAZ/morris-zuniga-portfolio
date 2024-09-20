@@ -1,10 +1,10 @@
 let mongoose = require('mongoose');
 
-//create a model class
+//create a model class defining the schema created in mongodb
 let bookModel = mongoose.Schema({
     name: String,
-    author: String,
-    published: String,
+    Author: String,
+    Published: String,
     description: String,
     price: Number
 
@@ -12,3 +12,5 @@ let bookModel = mongoose.Schema({
 {
     collection: "books"
 });
+
+module.exports = mongoose.model('Book', bookModel);//export the model(book.js) to be used in other files
