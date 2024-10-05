@@ -1,7 +1,11 @@
 <%- include('../partials/header.ejs') %>
 <%- include('../partials/main_nav.ejs') %>
 
-<!-- Main Content for add page -->
+
+
+
+
+<!-- Main Content for edit page -->
 <div class="container">
     <div class="row">
         <div class="offset-md-3 col-md-6"></div>
@@ -13,7 +17,9 @@
                     <input type="text" class="form-control" 
                            id="nameTextField" 
                            placeholder="Enter the book title"
-                           name="name" required>
+                           name="name" 
+                           value="<%= book.name %>"
+                           required>
                 </div>
 
                 <div class="form-group">
@@ -21,7 +27,9 @@
                     <input type="text" class="form-control" 
                            id="authorTextField" 
                            placeholder="Enter the Author"
-                           name="author" required>
+                           name="author" 
+                            value="<%= book.author %>"
+                           required>
                 </div>
 
                 <div class="form-group">
@@ -29,15 +37,20 @@
                     <input type="text" class="form-control" 
                            id="publishedTextField" 
                            placeholder="Enter the year published"
-                           name="published" required>
+                           name="published" 
+                            value="<%= book.published %>"
+                           required>
                 </div>
 
                 <div class="form-group">
                     <label for="descriptionTextArea">Description</label>
-                    <input type="text" class="form-control"
+                    <textarea type="text" class="form-control"
                               id="descriptionTextArea" 
                               placeholder="Enter description"
-                              name="description" required></textarea>
+                              name="description"
+                              required>
+                              <%= book.description %>
+                            </textarea>
                 </div>
 
                 <div class="form-group">
@@ -45,7 +58,9 @@
                     <input type="number" class="form-control" 
                            id="priceTextField" 
                            placeholder="Enter the price"
-                           name="price" required>
+                           name="price"
+                            value="<%= book.price %>" 
+                           required>
                 </div>
 
                 <button type="btn btn-primary" class="submit">
@@ -57,6 +72,7 @@
         </div>
     </div>
 </div>
+
 
 <%- include('../partials/bottom_nav.ejs') %>
 <%- include('../partials/footer.ejs') %>

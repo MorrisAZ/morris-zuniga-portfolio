@@ -9,21 +9,23 @@
   <!-- Main Content -->
   <main class="container">
  <div class="row">
-   <div class="col-md-offset-3 col-md-6">
+   <div class="offset-md-1 col-md-11">
      <h1><%= title %></h1>
-    <a href="/book-list/add" class="btn btn-primary" role="button"
+    <a href="/book-list/add" class="btn btn-primary" role="button">
   <i class="fas fa-plus-circle"></i>Add a Book</a>
      <br>
      
         <table class = "table table-bordered table-striped table-hover">
         <!--header row--> 
         <tr>
-            <th class="text-center">Name</th>
-            <th class="text-center">Author</th>
-            <th class="text-center">Published</th>
-            <th class="text-center">Description</th>
-            <th class="text-center">Price</th>
-        </tr>
+            <th class="text-center ">Name</th>
+            <th class="text-center ">Author</th>
+            <th class="text-center ">Published</th>
+            <th class="text-center ">Description</th>
+            <th class="text-center ">Price</th>
+            <th class="text-center "></th>
+            <th class="text-center "></th>
+          </tr>
         
 
         <!--repeatable table row-->
@@ -35,6 +37,13 @@
             <td class="text-center"><%= bookList[count].Published %></td>
             <td class="text-center"><%= bookList[count].description %></td>
             <td class="text-center"><%= bookList[count].price %></td>
+            <td class="text-center">
+              <a href="/book-list/edit/<%= bookList[count]._id %>" class="btn btn-primary btn-sm" role="button">
+                <i class="fas fa-pencil alt"></i>Edit</a>
+            </td>
+            <td class="text-center">
+              <a href="/book-list/delete/<%= bookList[count]._id %>" class="btn btn-danger btn-sm" role="button">
+                <i class="fas fa-trash-alt"></i>Delete</a></td>
         </tr> 
     <% } %>
     </table>

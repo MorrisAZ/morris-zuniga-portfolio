@@ -19,7 +19,7 @@ router.get('/', async (req, res, next) => {
 
 /*get route for displaying the add page -CREATE Operation */
 router.get('/add', (req, res, next) => {
-    res.render('book/add', {title: 'Add book',bookList: bookList});// Pass the book list to the template
+    res.render('book/add', {title: 'Add book'});// Pass the book list to the template
     });
 
 
@@ -47,64 +47,57 @@ Book.create(newBook, (err, Book) => { // Save the new book object to the databas
 });
 
 
-/*get route for displaying the edit page -UPDATE Operation */
+// GET route for displaying the edit page - UPDATE Operation
 router.get('/edit/:id', async (req, res, next) => {
+    try {
+        const id = req.params.id; // Get the id from the request
+        const bookToEdit = await Book.findById(id); // Find the book by id
 
-    let id = req.params.id; // Get the id from the request
-
-    Book.findById(id, (err, bookToEdit) => { // Find the book by id
-        if(err){
-            console.log(err);
-            res.end(err);
+        if (!bookToEdit) {
+            return res.status(404).send('Book not found');
         }
-        else{
-            // Show the edit view
-            res.render('book/edit', {title: 'Edit Book', book: bookToEdit}); 
-        }
-    });
 
+        // Show the edit view
+        res.render('book/edit', { title: 'Edit Book', book: bookToEdit });
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('An error occurred while fetching the book for editing'); // Send an error response
+    }
 });
-/*get route for processing the edit page -UPDATE Operation */
+
+// POST route for processing the edit page - UPDATE Operation
 router.post('/edit/:id', async (req, res, next) => {
+    try {
+        const id = req.params.id; // Get the id from the request
 
-    let id = req.params.id; // Get the id from the request
+        const updatedBook = {
+            name: req.body.name,
+            author: req.body.author,
+            published: req.body.published,
+            description: req.body.description,
+            price: req.body.price
+        };
 
-    let updatedBook = Book({ // Create a new book object using book model
-        "_id": id,
-        "name": req.body.name,
-        "author": req.body.author,
-        "published": req.body.published,
-        "description": req.body.description,
-        "price": req.body.price
-    });
-
-    Book.updateOne({_id: id }, updatedBook, (err) => { // Update the book object
-        if(err){
-            console.log(err);
-            res.end(err);
-        }
-        else
-        {
-            res.redirect('/book-list'); // Refresh the book list
-        }
-    });
-
-});
-/*get route to perform deletion -DELETE Operation */
-router.get('/delete/:id', async (req, res, next) => {
-
-let id = req.params.id; // Get the id from the request
-
-Book.remove({_id: id}, (err) => { // Delete the book by id
-    if(err){
-        console.log(err);
-        res.end(err);
-    }
-    else
-    {
+        await Book.updateOne({ _id: id }, updatedBook); // Update the book object
         res.redirect('/book-list'); // Refresh the book list
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('An error occurred while updating the book'); // Send an error response
     }
 });
+
+// GET route to perform deletion - DELETE Operation
+router.get('/delete/:id', async (req, res, next) => {
+    try {
+        const id = req.params.id; // Get the id from the request
+        await Book.deleteOne({ _id: id }); // Delete the book by id
+        res.redirect('/book-list'); // Refresh the book list
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('An error occurred while deleting the book'); // Send an error response
+    }
 });
+
+
 
 module.exports = router;
